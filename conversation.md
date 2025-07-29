@@ -1,0 +1,1 @@
+User requested a hosted First Aid site with dedicated pages for each basic injury type, including CPR and more. The pages are built using PicoCSS and feature Unsplash images for clear first aid illustration.

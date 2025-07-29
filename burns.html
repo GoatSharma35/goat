@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Burns - SwiftySave</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Hamburger Menu -->
+    <div class="hamburger-menu">
+      <button class="hamburger-button">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav class="hamburger-nav">
+        <div class="logo-container">
+          <strong>SwiftySave</strong>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Caduceus.svg/1200px-Caduceus.svg.png" alt="Medical Caduceus Symbol" />
+        </div>
+        <div class="emergency-buttons">
+          <a href="tel:4083324906" class="emergency-btn">911🚨</a>
+          <a href="tel:4083324906" class="emergency-btn poison-control-btn">Poison Control🚨</a>
+          <button onclick="shareLocation()" class="emergency-btn location-btn">Share Location📍</button>
+        </div>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="quiz.html">Practice Questions</a></li>
+          <li><a href="training.html">Training & Education</a></li>
+          <li><a href="profile.html">Medical Profile</a></li>
+          <li><a href="first-aid-supplies.html">First Aid Supplies</a></li>
+          <li><a href="cuts.html">Cuts</a></li>
+          <li><a href="burns.html">Burns</a></li>
+          <li><a href="sprains.html">Sprains</a></li>
+          <li><a href="fractures.html">Fractures</a></li>
+          <li><a href="choking.html">Choking</a></li>
+          <li><a href="nosebleeds.html">Nosebleeds</a></li>
+          <li><a href="eye-injuries.html">Eye Injuries</a></li>
+          <li><a href="insect-bites.html">Insect Bites</a></li>
+          <li><a href="cpr.html">CPR</a></li>
+          <li><a href="allergies.html">Anaphylaxis</a></li>
+          <li><a href="breathing-problems.html">Breathing Problems</a></li>
+          <li><a href="poisoning.html">Poisoning</a></li>
+          <li><a href="heat-cold-exposure.html">Heat/Cold Exposure</a></li>
+        </ul>
+      </nav>
+
+      <div class="hamburger-overlay"></div>
+    </div>
+    <main class="container">
+      <div class="grid">
+        <section>
+          <hgroup>
+            <h2>Treating Burns</h2>
+            <h3>Cool, clean, and protect</h3>
+          </hgroup>
+
+          <h4>For Minor Burns (1st & 2nd degree):</h4>
+          <ol>
+            <li><strong>Cool the burn</strong> - Hold under cool (not cold) running water for 10-20 minutes</li>
+            <li><strong>Remove jewelry</strong> - Take off rings, bracelets before swelling begins</li>
+            <li><strong>Don't break blisters</strong> - If blisters form, don't pop them</li>
+            <li><strong>Apply moisturizer</strong> - Use aloe vera or moisturizer while skin is damp</li>
+            <li><strong>Cover loosely</strong> - Use sterile gauze bandage, don't wrap tightly</li>
+            <li><strong>Take pain reliever</strong> - Ibuprofen or acetaminophen can help with pain</li>
+          </ol>
+
+          <article>
+            <h4>❌ Don't Do This:</h4>
+            <ul>
+              <li>Don't use ice, butter, or oil</li>
+              <li>Don't break blisters</li>
+              <li>Don't remove clothing stuck to burn</li>
+              <li>Don't use cotton balls on wound</li>
+            </ul>
+          </article>
+
+          <article>
+            <h4>🚨 Call 911 For:</h4>
+            <ul>
+              <li>Burns larger than 3 inches across</li>
+              <li>Burns on face, hands, feet, genitals, or major joints</li>
+              <li>3rd degree burns (white, charred, or leathery skin)</li>
+              <li>Chemical or electrical burns</li>
+              <li>Signs of infection</li>
+            </ul>
+          </article>
+
+          <figure>
+            <img src="data:image/jpeg;base64,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" alt="Cool water treatment for burns" />
+            <figcaption>Cool running water treatment for minor burns</figcaption>
+          </figure>
+        </section>
+      </div>
+    </main>
+    <footer class="container">
+      <small></small>
+    </footer>
+    <script src="script.js"></script>
+  </body>
+</html>

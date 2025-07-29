@@ -1,0 +1,160 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Poisoning - SwiftySave</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Hamburger Menu -->
+    <div class="hamburger-menu">
+      <button class="hamburger-button">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      
+      <nav class="hamburger-nav">
+        <div class="logo-container">
+          <strong>SwiftySave</strong>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Caduceus.svg/1200px-Caduceus.svg.png" alt="Medical Caduceus Symbol" />
+        </div>
+        <div class="emergency-buttons">
+          <a href="tel:4083324906" class="emergency-btn">911🚨</a>
+          <a href="tel:4083324906" class="emergency-btn poison-control-btn">Poison Control🚨</a>
+          <button onclick="shareLocation()" class="emergency-btn location-btn">Share Location📍</button>
+        </div>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="quiz.html">Practice Questions</a></li>
+          <li><a href="training.html">Training & Education</a></li>
+          <li><a href="profile.html">Medical Profile</a></li>
+          <li><a href="first-aid-supplies.html">First Aid Supplies</a></li>
+          <li><a href="cuts.html">Cuts</a></li>
+          <li><a href="burns.html">Burns</a></li>
+          <li><a href="sprains.html">Sprains</a></li>
+          <li><a href="fractures.html">Fractures</a></li>
+          <li><a href="choking.html">Choking</a></li>
+          <li><a href="nosebleeds.html">Nosebleeds</a></li>
+          <li><a href="eye-injuries.html">Eye Injuries</a></li>
+          <li><a href="insect-bites.html">Insect Bites</a></li>
+          <li><a href="cpr.html">CPR</a></li>
+          <li><a href="allergies.html">Anaphylaxis</a></li>
+          <li><a href="breathing-problems.html">Breathing Problems</a></li>
+          <li><a href="poisoning.html">Poisoning</a></li>
+          <li><a href="heat-cold-exposure.html">Heat/Cold Exposure</a></li>
+        </ul>
+      </nav>
+      
+      <div class="hamburger-overlay"></div>
+    </div>
+    <main class="container">
+      <div class="grid">
+        <section>
+          <hgroup>
+            <h2>Poisoning Emergency</h2>
+            <h3>Quick action saves lives</h3>
+          </hgroup>
+          
+          <article>
+            <h4>🚨 Call Poison Control IMMEDIATELY:</h4>
+            <p><strong>Poison Control: 1-800-222-1222</strong></p>
+            <p><strong>Or call 911 for severe symptoms</strong></p>
+          </article>
+
+          <h4>Signs of Poisoning:</h4>
+          <ul>
+            <li>Nausea and vomiting</li>
+            <li>Diarrhea</li>
+            <li>Abdominal pain</li>
+            <li>Difficulty breathing</li>
+            <li>Confusion or drowsiness</li>
+            <li>Seizures</li>
+            <li>Burns around mouth (chemical poisoning)</li>
+            <li>Strange odor on breath</li>
+          </ul>
+
+          <h4>Immediate Steps:</h4>
+          <ol>
+            <li><strong>Assess the situation</strong> - Is the area safe?</li>
+            <li><strong>Check breathing and consciousness</strong> - Start CPR if needed</li>
+            <li><strong>Call Poison Control</strong> - 1-800-222-1222</li>
+            <li><strong>Identify the poison</strong> - Save container/packaging</li>
+            <li><strong>Follow Poison Control instructions</strong> - They will guide specific treatment</li>
+            <li><strong>Monitor vital signs</strong> - Stay with person until help arrives</li>
+          </ol>
+
+          <article>
+            <h4>For Swallowed Poisons:</h4>
+            <ul>
+              <li><strong>DO NOT induce vomiting</strong> - Unless instructed by Poison Control</li>
+              <li><strong>Remove any remaining substance</strong> - From mouth with finger</li>
+              <li><strong>Give water or milk</strong> - Only if person is conscious and can swallow</li>
+              <li><strong>Keep person calm</strong> - Sit upright if conscious</li>
+            </ul>
+          </article>
+
+          <article>
+            <h4>For Skin Contact:</h4>
+            <ol>
+              <li><strong>Remove contaminated clothing</strong> - Avoid spreading poison</li>
+              <li><strong>Flush with water</strong> - For 15-20 minutes</li>
+              <li><strong>Remove jewelry</strong> - Before swelling occurs</li>
+              <li><strong>Don't use ointments</strong> - Unless instructed</li>
+            </ol>
+          </article>
+
+          <article>
+            <h4>For Inhaled Poisons:</h4>
+            <ol>
+              <li><strong>Get to fresh air immediately</strong> - Away from contaminated area</li>
+              <li><strong>Loosen tight clothing</strong> - Around neck and chest</li>
+              <li><strong>Check breathing</strong> - Start rescue breathing if needed</li>
+              <li><strong>Don't enter contaminated area</strong> - Without proper protection</li>
+            </ol>
+          </article>
+
+          <article>
+            <h4>❌ Never Do This:</h4>
+            <ul>
+              <li>Don't induce vomiting with corrosive substances</li>
+              <li>Don't give activated charcoal unless instructed</li>
+              <li>Don't give food or drink to unconscious person</li>
+              <li>Don't assume small amounts are harmless</li>
+              <li>Don't delay calling for help</li>
+            </ul>
+          </article>
+
+          <article>
+            <h4>Common Household Poisons:</h4>
+            <ul>
+              <li><strong>Medications</strong> - Overdose of prescription or OTC drugs</li>
+              <li><strong>Cleaning products</strong> - Bleach, ammonia, toilet bowl cleaners</li>
+              <li><strong>Plants</strong> - Some houseplants and wild plants</li>
+              <li><strong>Cosmetics</strong> - Nail polish, perfume, makeup</li>
+              <li><strong>Automotive products</strong> - Antifreeze, windshield washer fluid</li>
+            </ul>
+          </article>
+
+          <h4>Prevention Tips:</h4>
+          <ul>
+            <li>Store chemicals in original containers</li>
+            <li>Keep medicines and chemicals locked away from children</li>
+            <li>Never mix cleaning products</li>
+            <li>Read labels before using any product</li>
+            <li>Install carbon monoxide detectors</li>
+            <li>Keep Poison Control number handy: 1-800-222-1222</li>
+          </ul>
+
+        </section>
+      </div>
+    </main>
+    <footer class="container">
+      <small></small>
+    </footer>
+    <script src="script.js"></script>
+  </body>
+</html>

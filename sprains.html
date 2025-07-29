@@ -1,0 +1,101 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sprains - SwiftySave</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Hamburger Menu -->
+    <div class="hamburger-menu">
+      <button class="hamburger-button">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      
+      <nav class="hamburger-nav">
+        <div class="logo-container">
+          <strong>SwiftySave</strong>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Caduceus.svg/1200px-Caduceus.svg.png" alt="Medical Caduceus Symbol" />
+        </div>
+        <div class="emergency-buttons">
+          <a href="tel:4083324906" class="emergency-btn">911🚨</a>
+          <a href="tel:4083324906" class="emergency-btn poison-control-btn">Poison Control🚨</a>
+          <button onclick="shareLocation()" class="emergency-btn location-btn">Share Location📍</button>
+        </div>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="quiz.html">Practice Questions</a></li>
+          <li><a href="training.html">Training & Education</a></li>
+          <li><a href="profile.html">Medical Profile</a></li>
+          <li><a href="first-aid-supplies.html">First Aid Supplies</a></li>
+          <li><a href="cuts.html">Cuts</a></li>
+          <li><a href="burns.html">Burns</a></li>
+          <li><a href="sprains.html">Sprains</a></li>
+          <li><a href="fractures.html">Fractures</a></li>
+          <li><a href="choking.html">Choking</a></li>
+          <li><a href="nosebleeds.html">Nosebleeds</a></li>
+          <li><a href="eye-injuries.html">Eye Injuries</a></li>
+          <li><a href="insect-bites.html">Insect Bites</a></li>
+          <li><a href="cpr.html">CPR</a></li>
+          <li><a href="allergies.html">Anaphylaxis</a></li>
+          <li><a href="breathing-problems.html">Breathing Problems</a></li>
+          <li><a href="poisoning.html">Poisoning</a></li>
+          <li><a href="heat-cold-exposure.html">Heat/Cold Exposure</a></li>
+        </ul>
+      </nav>
+      
+      <div class="hamburger-overlay"></div>
+    </div>
+    <main class="container">
+      <div class="grid">
+        <section>
+          <hgroup>
+            <h2>Treating Sprains</h2>
+            <h3>Remember R.I.C.E. treatment</h3>
+          </hgroup>
+          
+          <h4>R.I.C.E. Method:</h4>
+          <ol>
+            <li><strong>Rest</strong> - Avoid activities that cause pain or swelling</li>
+            <li><strong>Ice</strong> - Apply ice pack for 15-20 minutes every 2-3 hours for first 48 hours</li>
+            <li><strong>Compression</strong> - Use elastic bandage to reduce swelling (not too tight)</li>
+            <li><strong>Elevation</strong> - Raise injured area above heart level when possible</li>
+          </ol>
+
+          <h4>Additional Care:</h4>
+          <ul>
+            <li><strong>Pain relief</strong> - Take over-the-counter pain medications as directed</li>
+            <li><strong>Gradual movement</strong> - Gently move joint through range of motion as tolerated</li>
+            <li><strong>Heat after 48 hours</strong> - Switch to heat therapy after initial swelling goes down</li>
+          </ul>
+
+          <article>
+            <h4>⚠️ See a Doctor If:</h4>
+            <ul>
+              <li>You can't bear weight or use the injured area</li>
+              <li>Joint feels unstable or numb</li>
+              <li>You have severe pain or can't move the joint</li>
+              <li>Redness or red streaks spread from injury</li>
+              <li>You re-injure the same area</li>
+              <li>No improvement after 2-3 days</li>
+            </ul>
+          </article>
+
+          <figure>
+            <img src="data:image/jpeg;base64,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" />
+            <figcaption>Proper compression bandaging technique for ankle sprain using elastic wrap</figcaption>
+          </figure>
+        </section>
+      </div>
+    </main>
+    <footer class="container">
+      <small></small>
+    </footer>
+    <script src="script.js"></script>
+  </body>
+</html>

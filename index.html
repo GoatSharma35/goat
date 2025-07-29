@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SwiftySave</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Hamburger Menu -->
+    <div class="hamburger-menu">
+      <button class="hamburger-button">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      
+      <nav class="hamburger-nav">
+        <div class="logo-container">
+          <strong>SwiftySave</strong>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Caduceus.svg/1200px-Caduceus.svg.png" alt="Medical Caduceus Symbol" />
+        </div>
+        <div class="emergency-buttons">
+          <a href="tel:4083324906" class="emergency-btn">911🚨</a>
+          <a href="tel:4083324906" class="emergency-btn poison-control-btn">Poison Control🚨</a>
+          <button onclick="shareLocation()" class="emergency-btn location-btn">Share Location📍</button>
+        </div>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="quiz.html">Practice Questions</a></li>
+          <li><a href="training.html">Training & Education</a></li>
+          <li><a href="profile.html">Medical Profile</a></li>
+          <li><a href="first-aid-supplies.html">First Aid Supplies</a></li>
+          <li><a href="cuts.html">Cuts</a></li>
+          <li><a href="burns.html">Burns</a></li>
+          <li><a href="sprains.html">Sprains</a></li>
+          <li><a href="fractures.html">Fractures</a></li>
+          <li><a href="choking.html">Choking</a></li>
+          <li><a href="nosebleeds.html">Nosebleeds</a></li>
+          <li><a href="eye-injuries.html">Eye Injuries</a></li>
+          <li><a href="insect-bites.html">Insect Bites</a></li>
+          <li><a href="cpr.html">CPR</a></li>
+          <li><a href="allergies.html">Anaphylaxis</a></li>
+          <li><a href="breathing-problems.html">Breathing Problems</a></li>
+          <li><a href="poisoning.html">Poisoning</a></li>
+          <li><a href="heat-cold-exposure.html">Heat/Cold Exposure</a></li>
+        </ul>
+      </nav>
+      
+      <div class="hamburger-overlay"></div>
+    </div>
+    <main class="container">
+      <div class="grid">
+        <section>
+          <hgroup>
+            <h2>Welcome to SwiftySave</h2>
+            <h3>Your resource for fast, reliable emergency care tips</h3>
+          </hgroup>
+          <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Search for symptoms or conditions (e.g., chest pain, difficulty breathing, severe bleeding...)" />
+            <button id="searchBtn">🔍</button>
+            <div id="searchResults" class="search-results"></div>
+          </div>
+          
+          <p><strong>Welcome!</strong>
+          Use the search bar above to quickly find help for any symptoms, or explore the topics in the menu to learn how to treat different injuries. It's always a good idea to keep a complete home first aid kit ready, see the checklist by clicking the button below. And most importantly, stay calm and stay safe. We're here to help. 😊</p>
+          
+          <a href="first-aid-supplies.html" role="button" style="margin: 1rem 0; background-color: var(--primary); color: white; text-decoration: none; display: inline-block; padding: 12px 24px; border-radius: 5px; font-weight: bold;">🩹 First Aid Supplies Checklist</a>
+          <figure>
+            <img src="https://firstaidsuppliesonline.com/wp-content/uploads/2015/11/68-13053R-1024x807.png" alt="First aid kit" />
+            <figcaption>Well-stocked home first aid kit with essential emergency supplies</figcaption>
+          </figure>
+        </section>
+      </div>
+    </main>
+    <footer class="container">
+      <small></small>
+    </footer>
+    <script src="script.js"></script>
+  </body>
+</html>

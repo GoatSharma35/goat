@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Practice Questions - SwiftySave</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css" />
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      /* Reduced padding for quiz questions */
+      #quiz-screen .container {
+        padding: 1rem;
+      }
+      
+      #quiz-screen article {
+        margin-bottom: 1rem;
+        padding: 1rem;
+      }
+      
+      .quiz-header {
+        margin-bottom: 1rem;
+      }
+      
+      .quiz-controls {
+        margin-top: 1rem;
+      }
+      
+      .option-button {
+        margin: 0.25rem 0;
+        padding: 0.75rem;
+        width: 100%;
+        text-align: left;
+      }
+      
+      @media (max-width: 768px) {
+        #quiz-screen .container {
+          padding: 0.5rem;
+        }
+        
+        #quiz-screen article {
+          padding: 0.75rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Hamburger Menu -->
+    <div class="hamburger-menu">
+      <button class="hamburger-button">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav class="hamburger-nav">
+        <div class="logo-container">
+          <strong>SwiftySave</strong>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Caduceus.svg/1200px-Caduceus.svg.png" alt="Medical Caduceus Symbol" />
+        </div>
+        <div class="emergency-buttons">
+          <a href="tel:4083324906" class="emergency-btn">911🚨</a>
+          <a href="tel:4083324906" class="emergency-btn poison-control-btn">Poison Control🚨</a>
+          <button onclick="shareLocation()" class="emergency-btn location-btn">Share Location📍</button>
+        </div>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="quiz.html">Practice Questions</a></li>
+          <li><a href="training.html">Training & Education</a></li>
+          <li><a href="profile.html">Medical Profile</a></li>
+          <li><a href="first-aid-supplies.html">First Aid Supplies</a></li>
+          <li><a href="cuts.html">Cuts</a></li>
+          <li><a href="burns.html">Burns</a></li>
+          <li><a href="sprains.html">Sprains</a></li>
+          <li><a href="fractures.html">Fractures</a></li>
+          <li><a href="choking.html">Choking</a></li>
+          <li><a href="nosebleeds.html">Nosebleeds</a></li>
+          <li><a href="eye-injuries.html">Eye Injuries</a></li>
+          <li><a href="insect-bites.html">Insect Bites</a></li>
+          <li><a href="cpr.html">CPR</a></li>
+          <li><a href="allergies.html">Anaphylaxis</a></li>
+          <li><a href="breathing-problems.html">Breathing Problems</a></li>
+          <li><a href="poisoning.html">Poisoning</a></li>
+          <li><a href="heat-cold-exposure.html">Heat/Cold Exposure</a></li>
+        </ul>
+      </nav>
+
+      <div class="hamburger-overlay"></div>
+    </div>
+
+    <main class="container">
+      <div class="grid">
+        <section>
+          <!-- Quiz Setup Screen -->
+          <div id="quiz-setup">
+            <hgroup>
+              <h2>Practice Questions</h2>
+              <h3>Test your first aid knowledge</h3>
+            </hgroup>
+
+            <article>
+              <h4>Select Injury Type:</h4>
+              <select id="injury-type">
+                <option value="">-- Choose an injury type --</option>
+                <option value="cuts">Cuts</option>
+                <option value="burns">Burns</option>
+                <option value="sprains">Sprains</option>
+                <option value="fractures">Fractures</option>
+                <option value="choking">Choking</option>
+                <option value="nosebleeds">Nosebleeds</option>
+                <option value="eye-injuries">Eye Injuries</option>
+                <option value="insect-bites">Insect Bites</option>
+                <option value="cpr">CPR</option>
+                <option value="first-aid-supplies">First Aid Supplies</option>
+                <option value="allergies">Anaphylaxis</option>
+                <option value="breathing-problems">Breathing Problems</option>
+                <option value="poisoning">Poisoning</option>
+                <option value="heat-cold-exposure">Heat/Cold Exposure</option>
+              </select>
+            </article>
+
+            <article>
+              <h4>Select Difficulty Level:</h4>
+              <select id="difficulty-level">
+                <option value="">-- Choose difficulty --</option>
+                <option value="beginner">Beginner</option>
+                <option value="intermediate">Intermediate</option>
+                <option value="advanced">Advanced</option>
+              </select>
+            </article>
+
+            <button id="start-quiz" disabled>Start Quiz</button>
+          </div>
+
+          <!-- Quiz Question Screen -->
+          <div id="quiz-screen" style="display: none;">
+            <div class="quiz-header">
+              <h3>Question <span id="question-number">1</span> of 10</h3>
+              <div class="quiz-progress">
+                <progress id="progress-bar" value="1" max="10"></progress>
+              </div>
+            </div>
+
+            <article>
+              <h4 id="question-text"></h4>
+              <div id="answer-options"></div>
+            </article>
+
+            <div class="quiz-controls">
+              <button id="next-question" style="display: none;">Next Question</button>
+            </div>
+          </div>
+
+          <!-- Quiz Results Screen -->
+          <div id="quiz-results" style="display: none;">
+            <hgroup>
+              <h2>Quiz Complete!</h2>
+              <h3 id="score-text"></h3>
+            </hgroup>
+
+            <article>
+              <div id="results-summary"></div>
+            </article>
+
+            <div class="quiz-controls">
+              <button id="retry-quiz" style="display: none;">Retry Quiz</button>
+              <button id="done-quiz">Done</button>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="container">
+      <small></small>
+    </footer>
+    <script src="script.js"></script>
+    <script src="quiz.js"></script>
+  </body>
+</html>

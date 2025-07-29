@@ -1,0 +1,1035 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Medical Profile - SwiftySave</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css" />
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      .profile-section {
+        margin-bottom: 2rem;
+        padding: 1.5rem;
+        border: 1px solid var(--muted-border-color);
+        border-radius: 8px;
+      }
+      
+      .form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+      }
+      
+      @media (max-width: 768px) {
+        .form-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      
+      .emergency-contact-item {
+        border: 1px solid var(--muted-border-color);
+        padding: 1rem;
+        margin-bottom: 1rem;
+        border-radius: 5px;
+        background: var(--card-background-color);
+      }
+      
+      .qr-container {
+        text-align: center;
+        padding: 2rem;
+        border: 2px dashed var(--primary);
+        border-radius: 10px;
+        margin: 1rem 0;
+      }
+      
+      .password-screen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--card-background-color);
+        z-index: 2000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+      }
+      
+      .password-container {
+        max-width: 400px;
+        width: 90%;
+        padding: 2rem;
+        text-align: center;
+      }
+      
+      .hidden {
+        display: none !important;
+      }
+      
+      .toggle-switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+      }
+      
+      .toggle-switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+      
+      .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        transition: .4s;
+        border-radius: 34px;
+      }
+      
+      .slider:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        transition: .4s;
+        border-radius: 50%;
+      }
+      
+      input:checked + .slider {
+        background-color: var(--primary);
+      }
+      
+      input:checked + .slider:before {
+        transform: translateX(26px);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Password Protection Screen -->
+    <div id="passwordScreen" class="password-screen">
+      <div class="password-container">
+        <h2>🔒 Access Medical Profile</h2>
+        <div id="passwordSetup" class="hidden">
+          <p>Set up your profile password:</p>
+          <input type="password" id="newPassword" placeholder="Create password" />
+          <input type="password" id="confirmPassword" placeholder="Confirm password" />
+          <button onclick="setupPassword()">Set Password</button>
+        </div>
+        <div id="passwordLogin">
+          <p>Enter your password to access your medical profile:</p>
+          <input type="password" id="passwordInput" placeholder="Enter password" />
+          <button onclick="verifyPassword()">Access Profile</button>
+          <p><small>First time? Password will be set when you enter one.</small></p>
+        </div>
+        <div id="errorMessage" style="color: red; margin-top: 1rem;"></div>
+      </div>
+    </div>
+
+    <!-- Main Profile Content -->
+    <div id="profileContent" class="hidden">
+      <!-- Hamburger Menu -->
+      <div class="hamburger-menu">
+        <button class="hamburger-button">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        <nav class="hamburger-nav">
+          <div class="logo-container">
+            <strong>SwiftySave</strong>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Caduceus.svg/1200px-Caduceus.svg.png" alt="Medical Caduceus Symbol" />
+          </div>
+          <div class="emergency-buttons">
+            <a href="tel:4083324906" class="emergency-btn">911🚨</a>
+            <a href="tel:4083324906" class="emergency-btn poison-control-btn">Poison Control🚨</a>
+            <button onclick="shareLocation()" class="emergency-btn location-btn">Share Location📍</button>
+          </div>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="quiz.html">Practice Questions</a></li>
+            <li><a href="training.html">Training & Education</a></li>
+            <li><a href="profile.html">Medical Profile</a></li>
+            <li><a href="first-aid-supplies.html">First Aid Supplies</a></li>
+            <li><a href="cuts.html">Cuts</a></li>
+            <li><a href="burns.html">Burns</a></li>
+            <li><a href="sprains.html">Sprains</a></li>
+            <li><a href="fractures.html">Fractures</a></li>
+            <li><a href="choking.html">Choking</a></li>
+            <li><a href="nosebleeds.html">Nosebleeds</a></li>
+            <li><a href="eye-injuries.html">Eye Injuries</a></li>
+            <li><a href="insect-bites.html">Insect Bites</a></li>
+            <li><a href="cpr.html">CPR</a></li>
+            <li><a href="allergies.html">Anaphylaxis</a></li>
+            <li><a href="breathing-problems.html">Breathing Problems</a></li>
+            <li><a href="poisoning.html">Poisoning</a></li>
+            <li><a href="heat-cold-exposure.html">Heat/Cold Exposure</a></li>
+          </ul>
+        </nav>
+
+        <div class="hamburger-overlay"></div>
+      </div>
+
+      <main class="container">
+        <div class="grid">
+          <section>
+            <hgroup>
+              <h2>🏥 Medical Profile</h2>
+              <h3>Emergency medical information</h3>
+            </hgroup>
+
+            <!-- Save Profile Button at Top -->
+            <div style="text-align: center; margin: 1rem 0 2rem 0;">
+              <button onclick="saveProfile()" style="background: var(--primary); font-size: 1.1rem; padding: 0.75rem 2rem;">💾 Save Profile</button>
+            </div>
+
+            <!-- Personal Information -->
+            <div class="profile-section">
+              <h4>👤 Personal Information</h4>
+              <div class="form-grid">
+                <div>
+                  <label for="fullName">Full Name</label>
+                  <input type="text" id="fullName" placeholder="Enter full name" />
+                </div>
+                <div>
+                  <label for="age">Age</label>
+                  <input type="number" id="age" placeholder="Enter age" />
+                </div>
+                <div>
+                  <label for="dateOfBirth">Date of Birth</label>
+                  <input type="date" id="dateOfBirth" />
+                </div>
+                <div>
+                  <label for="weight">Weight</label>
+                  <input type="text" id="weight" placeholder="e.g., 150 lbs" />
+                </div>
+                <div>
+                  <label for="bloodType">Blood Type</label>
+                  <select id="bloodType">
+                    <option value="">Select blood type</option>
+                    <option value="A+">A+</option>
+                    <option value="A-">A-</option>
+                    <option value="B+">B+</option>
+                    <option value="B-">B-</option>
+                    <option value="AB+">AB+</option>
+                    <option value="AB-">AB-</option>
+                    <option value="O+">O+</option>
+                    <option value="O-">O-</option>
+                  </select>
+                </div>
+                <div>
+                  <label for="donorStatus">Organ Donor</label>
+                  <select id="donorStatus">
+                    <option value="">Select status</option>
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Medical History -->
+            <div class="profile-section">
+              <h4>📋 Medical History</h4>
+              <label for="medicalHistory">Personal Medical History</label>
+              <textarea id="medicalHistory" rows="4" placeholder="List significant medical conditions, surgeries, hospitalizations..."></textarea>
+              
+              <label for="familyMedicalHistory">Family Medical History</label>
+              <textarea id="familyMedicalHistory" rows="4" placeholder="List family history of heart disease, diabetes, cancer, etc..."></textarea>
+            </div>
+
+            <!-- Current Medications -->
+            <div class="profile-section">
+              <h4>💊 Current Medications & Alarms</h4>
+              <div id="medicationsContainer">
+                <!-- Medications will be added dynamically -->
+              </div>
+              <button type="button" onclick="addMedication()">+ Add Medication</button>
+              
+              <!-- Medication Alarm Status -->
+              <div style="margin-top: 2rem; padding: 1rem; background: var(--card-background-color); border: 1px solid var(--muted-border-color); border-radius: 8px;">
+                <h5>🔔 Active Medication Alarms</h5>
+                <div id="activeAlarms">
+                  <p><small>No active alarms set. Add medications with alarm times above.</small></p>
+                </div>
+                <button onclick="testAlarm()" style="margin-top: 1rem; background: #28a745;">🔔 Test Alarm Sound</button>
+              </div>
+            </div>
+
+            <!-- Allergies & Conditions -->
+            <div class="profile-section">
+              <h4>⚠️ Allergies & Medical Conditions</h4>
+              <div class="form-grid">
+                <div>
+                  <label for="allergies">Allergies</label>
+                  <textarea id="allergies" rows="3" placeholder="Food allergies, drug allergies, environmental allergies..."></textarea>
+                </div>
+                <div>
+                  <label for="conditions">Current Conditions</label>
+                  <textarea id="conditions" rows="3" placeholder="Diabetes, asthma, heart conditions, etc..."></textarea>
+                </div>
+              </div>
+            </div>
+
+            <!-- Vaccination Status -->
+            <div class="profile-section">
+              <h4>💉 Vaccination Status</h4>
+              <textarea id="vaccinationStatus" rows="3" placeholder="List recent vaccinations and dates (COVID, flu, etc.)..."></textarea>
+            </div>
+
+            <!-- Emergency Contacts -->
+            <div class="profile-section">
+              <h4>📞 Emergency Contacts</h4>
+              <div id="emergencyContactsContainer">
+                <div class="emergency-contact-item">
+                  <div class="form-grid">
+                    <div>
+                      <label>Contact Name</label>
+                      <input type="text" class="contact-name" placeholder="Full name" />
+                    </div>
+                    <div>
+                      <label>Relationship</label>
+                      <input type="text" class="contact-relationship" placeholder="Spouse, Parent, etc." />
+                    </div>
+                    <div>
+                      <label>Phone Number</label>
+                      <input type="tel" class="contact-phone" placeholder="(555) 123-4567" />
+                    </div>
+                    <div>
+                      <label>Email</label>
+                      <input type="email" class="contact-email" placeholder="email@example.com" />
+                    </div>
+                  </div>
+                  <div style="margin-top: 1rem;">
+                    <label>
+                      <span>Location Sharing Enabled</span>
+                      <label class="toggle-switch" style="margin-left: 1rem;">
+                        <input type="checkbox" class="location-sharing">
+                        <span class="slider"></span>
+                      </label>
+                    </label>
+                  </div>
+                  <button type="button" onclick="textMyLocation(this)" style="margin-top: 1rem; width: 100%;">📍 Text My Location</button>
+                </div>
+              </div>
+              <button type="button" onclick="addEmergencyContact()">+ Add Emergency Contact</button>
+            </div>
+
+            <!-- Emergency Sharing -->
+            <div class="profile-section">
+              <h4>🚨 Emergency Sharing</h4>
+              
+              <div style="margin-bottom: 2rem;">
+                <label>
+                  <span>ICE Mode (In Case of Emergency)</span>
+                  <label class="toggle-switch" style="margin-left: 1rem;">
+                    <input type="checkbox" id="iceMode">
+                    <span class="slider"></span>
+                  </label>
+                </label>
+                <small style="display: block; margin-top: 0.5rem; color: var(--muted-color);">
+                  When enabled, emergency responders can access your profile by adding "?ice=true" to the URL without needing your password
+                </small>
+                <div id="iceInstructions" class="hidden" style="margin-top: 1rem; padding: 1rem; background: rgba(220, 53, 69, 0.1); border: 1px solid #dc3545; border-radius: 5px;">
+                  <strong>Emergency Access URL:</strong><br>
+                  <code id="iceUrl" style="word-break: break-all;"></code>
+                </div>
+              </div>
+
+              <div class="qr-container">
+                <h5>📱 QR Code Access</h5>
+                <div id="qrCode">
+                  <!-- QR code will be generated here -->
+                </div>
+                <p><small>Scan to access medical profile quickly</small></p>
+                <button onclick="generateQRCode()">🔄 Regenerate QR Code</button>
+                <p><small style="color: var(--muted-color);">
+                  Emergency access: Add "?ice=true" to URL for ICE mode
+                </small></p>
+              </div>
+
+              <div style="text-align: center; margin: 2rem 0;">
+                <button onclick="exportToPDF()" style="margin: 0.5rem;">📄 Export to PDF</button>
+                <button onclick="printProfile()" style="margin: 0.5rem;">🖨️ Print Profile</button>
+              </div>
+            </div>
+
+            <!-- Save/Lock Controls -->
+            <div style="text-align: center; margin: 2rem 0;">
+              <button onclick="lockProfile()" style="background: #dc3545; margin: 0.5rem;">🔒 Lock Profile</button>
+              <button onclick="changePassword()" style="margin: 0.5rem;">🔑 Change Password</button>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+
+    <footer class="container">
+      <small></small>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+      // Profile Management System
+      let profileData = {};
+      let isAuthenticated = false;
+
+      // Initialize on page load
+      document.addEventListener('DOMContentLoaded', function() {
+        checkAuthentication();
+        loadProfile();
+      });
+
+      function checkAuthentication() {
+        const savedPassword = localStorage.getItem('medicalProfilePassword');
+        const iceMode = localStorage.getItem('iceMode') === 'true';
+        
+        // Check if this is an emergency situation (you could add more sophisticated detection)
+        const urlParams = new URLSearchParams(window.location.search);
+        const isEmergency = urlParams.get('emergency') === 'true' || urlParams.get('ice') === 'true';
+        
+        if (iceMode && isEmergency) {
+          // ICE mode bypasses password in emergency situations
+          isAuthenticated = true;
+          showProfile();
+          // Show emergency notice
+          document.body.insertAdjacentHTML('afterbegin', `
+            <div style="background: #dc3545; color: white; text-align: center; padding: 10px; font-weight: bold;">
+              🚨 ICE MODE ACTIVE - Emergency Access Enabled
+            </div>
+          `);
+          return;
+        }
+        
+        if (!savedPassword) {
+          // First time setup
+          document.getElementById('passwordSetup').classList.remove('hidden');
+          document.getElementById('passwordLogin').classList.add('hidden');
+        }
+      }
+
+      function setupPassword() {
+        const newPass = document.getElementById('newPassword').value;
+        const confirmPass = document.getElementById('confirmPassword').value;
+        const errorDiv = document.getElementById('errorMessage');
+        
+        if (newPass.length < 6) {
+          errorDiv.textContent = 'Password must be at least 6 characters long';
+          return;
+        }
+        
+        if (newPass !== confirmPass) {
+          errorDiv.textContent = 'Passwords do not match';
+          return;
+        }
+        
+        // Hash password (simple method for demo - in production use proper hashing)
+        const hashedPassword = btoa(newPass);
+        localStorage.setItem('medicalProfilePassword', hashedPassword);
+        
+        isAuthenticated = true;
+        showProfile();
+      }
+
+      function verifyPassword() {
+        const enteredPassword = document.getElementById('passwordInput').value;
+        const savedPassword = localStorage.getItem('medicalProfilePassword');
+        const errorDiv = document.getElementById('errorMessage');
+        
+        if (!savedPassword) {
+          // First time - set password
+          if (enteredPassword.length < 6) {
+            errorDiv.textContent = 'Password must be at least 6 characters long';
+            return;
+          }
+          const hashedPassword = btoa(enteredPassword);
+          localStorage.setItem('medicalProfilePassword', hashedPassword);
+          isAuthenticated = true;
+          showProfile();
+          return;
+        }
+        
+        // Verify existing password
+        if (btoa(enteredPassword) === savedPassword) {
+          isAuthenticated = true;
+          showProfile();
+        } else {
+          errorDiv.textContent = 'Incorrect password';
+        }
+      }
+
+      function showProfile() {
+        document.getElementById('passwordScreen').classList.add('hidden');
+        document.getElementById('profileContent').classList.remove('hidden');
+        loadProfile();
+        generateQRCode();
+      }
+
+      function loadProfile() {
+        const saved = localStorage.getItem('medicalProfile');
+        if (saved) {
+          profileData = JSON.parse(saved);
+          populateForm();
+        }
+      }
+
+      function populateForm() {
+        // Personal info
+        document.getElementById('fullName').value = profileData.fullName || '';
+        document.getElementById('age').value = profileData.age || '';
+        document.getElementById('dateOfBirth').value = profileData.dateOfBirth || '';
+        document.getElementById('weight').value = profileData.weight || '';
+        document.getElementById('bloodType').value = profileData.bloodType || '';
+        document.getElementById('donorStatus').value = profileData.donorStatus || '';
+        
+        // Medical history
+        document.getElementById('medicalHistory').value = profileData.medicalHistory || '';
+        document.getElementById('familyMedicalHistory').value = profileData.familyMedicalHistory || '';
+        
+        // Allergies and conditions
+        document.getElementById('allergies').value = profileData.allergies || '';
+        document.getElementById('conditions').value = profileData.conditions || '';
+        document.getElementById('vaccinationStatus').value = profileData.vaccinationStatus || '';
+        
+        // ICE mode
+        document.getElementById('iceMode').checked = profileData.iceMode || false;
+        
+        // Load medications
+        if (profileData.medications) {
+          const container = document.getElementById('medicationsContainer');
+          container.innerHTML = '';
+          profileData.medications.forEach(med => {
+            addMedication(med.name, med.time, med.alarmTime, med.alarmEnabled);
+          });
+        }
+        
+        // Load emergency contacts
+        if (profileData.emergencyContacts) {
+          const container = document.getElementById('emergencyContactsContainer');
+          container.innerHTML = '';
+          profileData.emergencyContacts.forEach(contact => {
+            addEmergencyContact(contact);
+          });
+        }
+      }
+
+      function saveProfile() {
+        // Collect all form data
+        profileData = {
+          fullName: document.getElementById('fullName').value,
+          age: document.getElementById('age').value,
+          dateOfBirth: document.getElementById('dateOfBirth').value,
+          weight: document.getElementById('weight').value,
+          bloodType: document.getElementById('bloodType').value,
+          donorStatus: document.getElementById('donorStatus').value,
+          medicalHistory: document.getElementById('medicalHistory').value,
+          familyMedicalHistory: document.getElementById('familyMedicalHistory').value,
+          allergies: document.getElementById('allergies').value,
+          conditions: document.getElementById('conditions').value,
+          vaccinationStatus: document.getElementById('vaccinationStatus').value,
+          iceMode: document.getElementById('iceMode').checked,
+          medications: [],
+          emergencyContacts: []
+        };
+        
+        // Collect medications
+        document.querySelectorAll('.medication-item').forEach(item => {
+          const name = item.querySelector('.med-name').value;
+          const time = item.querySelector('.med-time').value;
+          const alarmTime = item.querySelector('.med-alarm-time')?.value || '';
+          const alarmEnabled = item.querySelector('.med-alarm-enabled')?.checked || false;
+          if (name || time) {
+            profileData.medications.push({ name, time, alarmTime, alarmEnabled });
+          }
+        });
+        
+        // Collect emergency contacts
+        document.querySelectorAll('.emergency-contact-item').forEach(item => {
+          const contact = {
+            name: item.querySelector('.contact-name').value,
+            relationship: item.querySelector('.contact-relationship').value,
+            phone: item.querySelector('.contact-phone').value,
+            email: item.querySelector('.contact-email').value,
+            locationSharing: item.querySelector('.location-sharing').checked
+          };
+          if (contact.name || contact.phone) {
+            profileData.emergencyContacts.push(contact);
+          }
+        });
+        
+        // Save to localStorage
+        localStorage.setItem('medicalProfile', JSON.stringify(profileData));
+        localStorage.setItem('iceMode', profileData.iceMode);
+        
+        // Update medication alarms
+        updateMedicationAlarms();
+        
+        alert('✅ Profile saved successfully!');
+        generateQRCode();
+      }
+
+      // Medication Alarm System
+      let medicationAlarms = [];
+      let alarmIntervals = [];
+
+      function updateMedicationAlarms() {
+        // Clear existing alarms
+        alarmIntervals.forEach(interval => clearInterval(interval));
+        alarmIntervals = [];
+        medicationAlarms = [];
+
+        // Collect enabled alarms
+        document.querySelectorAll('.medication-item').forEach(item => {
+          const name = item.querySelector('.med-name').value;
+          const alarmTime = item.querySelector('.med-alarm-time')?.value;
+          const alarmEnabled = item.querySelector('.med-alarm-enabled')?.checked;
+          
+          if (name && alarmTime && alarmEnabled) {
+            medicationAlarms.push({
+              name: name,
+              time: alarmTime,
+              enabled: true
+            });
+          }
+        });
+
+        // Set up new alarms
+        setupAlarmScheduler();
+        updateActiveAlarmsDisplay();
+      }
+
+      function setupAlarmScheduler() {
+        // Check for alarms every minute
+        const alarmChecker = setInterval(() => {
+          const now = new Date();
+          const currentTime = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+          
+          medicationAlarms.forEach(alarm => {
+            if (alarm.enabled && alarm.time === currentTime) {
+              triggerMedicationAlarm(alarm);
+            }
+          });
+        }, 60000); // Check every minute
+
+        alarmIntervals.push(alarmChecker);
+      }
+
+      function triggerMedicationAlarm(alarm) {
+        // Show notification
+        showMedicationNotification(alarm);
+        
+        // Play alarm sound
+        playAlarmSound();
+        
+        // Request browser notification permission and show notification
+        if ('Notification' in window) {
+          if (Notification.permission === 'granted') {
+            new Notification(`💊 Medication Reminder`, {
+              body: `Time to take your ${alarm.name}`,
+              icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">💊</text></svg>',
+              tag: 'medication-alarm',
+              requireInteraction: true
+            });
+          } else if (Notification.permission !== 'denied') {
+            Notification.requestPermission().then(permission => {
+              if (permission === 'granted') {
+                new Notification(`💊 Medication Reminder`, {
+                  body: `Time to take your ${alarm.name}`,
+                  icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">💊</text></svg>',
+                  tag: 'medication-alarm',
+                  requireInteraction: true
+                });
+              }
+            });
+          }
+        }
+      }
+
+      function showMedicationNotification(alarm) {
+        // Create modal notification
+        const modal = document.createElement('div');
+        modal.innerHTML = `
+          <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 3000; display: flex; align-items: center; justify-content: center;">
+            <div style="background: var(--card-background-color); padding: 2rem; border-radius: 10px; text-align: center; max-width: 400px; width: 90%;">
+              <h2 style="color: var(--primary); margin-bottom: 1rem;">💊 Medication Reminder</h2>
+              <p style="font-size: 1.2rem; margin-bottom: 1rem;">Time to take your</p>
+              <p style="font-size: 1.5rem; font-weight: bold; color: var(--primary); margin-bottom: 2rem;">${alarm.name}</p>
+              <div style="display: flex; gap: 1rem; justify-content: center;">
+                <button onclick="this.closest('div').parentElement.remove()" style="background: var(--primary); padding: 0.75rem 1.5rem;">✅ Taken</button>
+                <button onclick="snoozeAlarm('${alarm.name}', this.closest('div').parentElement)" style="background: #ffc107; padding: 0.75rem 1.5rem;">⏰ Snooze 5min</button>
+                <button onclick="this.closest('div').parentElement.remove()" style="background: #dc3545; padding: 0.75rem 1.5rem;">❌ Dismiss</button>
+              </div>
+            </div>
+          </div>
+        `;
+        document.body.appendChild(modal);
+        
+        // Auto-dismiss after 5 minutes if no action
+        setTimeout(() => {
+          if (document.body.contains(modal)) {
+            modal.remove();
+          }
+        }, 300000);
+      }
+
+      function snoozeAlarm(medicationName, modal) {
+        modal.remove();
+        
+        // Set snooze alarm for 5 minutes
+        setTimeout(() => {
+          const alarm = { name: medicationName, time: 'snooze' };
+          triggerMedicationAlarm(alarm);
+        }, 300000);
+        
+        alert(`⏰ ${medicationName} reminder snoozed for 5 minutes`);
+      }
+
+      function playAlarmSound() {
+        // Create audio context for alarm sound
+        try {
+          const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+          
+          // Create oscillator for beep sound
+          const oscillator = audioContext.createOscillator();
+          const gainNode = audioContext.createGain();
+          
+          oscillator.connect(gainNode);
+          gainNode.connect(audioContext.destination);
+          
+          oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
+          gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+          
+          oscillator.start();
+          
+          // Beep pattern: 3 short beeps
+          setTimeout(() => oscillator.stop(), 200);
+          setTimeout(() => {
+            const osc2 = audioContext.createOscillator();
+            const gain2 = audioContext.createGain();
+            osc2.connect(gain2);
+            gain2.connect(audioContext.destination);
+            osc2.frequency.setValueAtTime(800, audioContext.currentTime);
+            gain2.gain.setValueAtTime(0.3, audioContext.currentTime);
+            osc2.start();
+            setTimeout(() => osc2.stop(), 200);
+          }, 400);
+          setTimeout(() => {
+            const osc3 = audioContext.createOscillator();
+            const gain3 = audioContext.createGain();
+            osc3.connect(gain3);
+            gain3.connect(audioContext.destination);
+            osc3.frequency.setValueAtTime(800, audioContext.currentTime);
+            gain3.gain.setValueAtTime(0.3, audioContext.currentTime);
+            osc3.start();
+            setTimeout(() => osc3.stop(), 200);
+          }, 800);
+        } catch (e) {
+          console.log('Audio not supported');
+        }
+      }
+
+      function testAlarm() {
+        const testAlarm = { name: 'Test Medication', time: 'test' };
+        triggerMedicationAlarm(testAlarm);
+      }
+
+      function updateActiveAlarmsDisplay() {
+        const activeAlarmsDiv = document.getElementById('activeAlarms');
+        
+        if (medicationAlarms.length === 0) {
+          activeAlarmsDiv.innerHTML = '<p><small>No active alarms set. Add medications with alarm times above.</small></p>';
+          return;
+        }
+        
+        const alarmsList = medicationAlarms.map(alarm => 
+          `<div style="display: flex; justify-content: space-between; align-items: center; padding: 0.5rem; margin: 0.25rem 0; background: rgba(40, 167, 69, 0.1); border-radius: 5px;">
+            <span><strong>${alarm.name}</strong></span>
+            <span style="color: var(--primary);">⏰ ${alarm.time}</span>
+          </div>`
+        ).join('');
+        
+        activeAlarmsDiv.innerHTML = alarmsList;
+      }
+
+      // Initialize alarm system when profile loads
+      document.addEventListener('DOMContentLoaded', function() {
+        // Request notification permission on page load
+        if ('Notification' in window && Notification.permission === 'default') {
+          Notification.requestPermission();
+        }
+        
+        // Set up alarms after profile loads
+        setTimeout(() => {
+          updateMedicationAlarms();
+        }, 1000);
+      });
+
+      function addMedication(name = '', time = '', alarmTime = '', alarmEnabled = false) {
+        const container = document.getElementById('medicationsContainer');
+        const medDiv = document.createElement('div');
+        medDiv.className = 'medication-item';
+        medDiv.style.marginBottom = '2rem';
+        medDiv.style.padding = '1.5rem';
+        medDiv.style.border = '1px solid var(--muted-border-color)';
+        medDiv.style.borderRadius = '8px';
+        medDiv.innerHTML = `
+          <div class="form-grid">
+            <div>
+              <label>Medication Name</label>
+              <input type="text" class="med-name" value="${name}" placeholder="e.g., Aspirin" />
+            </div>
+            <div>
+              <label>Dosage & Instructions</label>
+              <input type="text" class="med-time" value="${time}" placeholder="e.g., 81mg daily" />
+            </div>
+            <div>
+              <label>Alarm Time</label>
+              <input type="time" class="med-alarm-time" value="${alarmTime}" />
+            </div>
+            <div>
+              <label>
+                <span>Enable Alarm</span>
+                <label class="toggle-switch" style="margin-left: 1rem;">
+                  <input type="checkbox" class="med-alarm-enabled" ${alarmEnabled ? 'checked' : ''}>
+                  <span class="slider"></span>
+                </label>
+              </label>
+            </div>
+          </div>
+          <button type="button" onclick="this.parentElement.remove(); updateMedicationAlarms();" style="margin-top: 1rem; background: #dc3545; width: 100%;">Remove Medication</button>
+        `;
+        container.appendChild(medDiv);
+        
+        // Add event listeners for alarm changes
+        const alarmTimeInput = medDiv.querySelector('.med-alarm-time');
+        const alarmEnabledInput = medDiv.querySelector('.med-alarm-enabled');
+        
+        alarmTimeInput.addEventListener('change', updateMedicationAlarms);
+        alarmEnabledInput.addEventListener('change', updateMedicationAlarms);
+      }
+
+      function addEmergencyContact(contact = {}) {
+        const container = document.getElementById('emergencyContactsContainer');
+        const contactDiv = document.createElement('div');
+        contactDiv.className = 'emergency-contact-item';
+        contactDiv.innerHTML = `
+          <div class="form-grid">
+            <div>
+              <label>Contact Name</label>
+              <input type="text" class="contact-name" value="${contact.name || ''}" placeholder="Full name" />
+            </div>
+            <div>
+              <label>Relationship</label>
+              <input type="text" class="contact-relationship" value="${contact.relationship || ''}" placeholder="Spouse, Parent, etc." />
+            </div>
+            <div>
+              <label>Phone Number</label>
+              <input type="tel" class="contact-phone" value="${contact.phone || ''}" placeholder="(555) 123-4567" />
+            </div>
+            <div>
+              <label>Email</label>
+              <input type="email" class="contact-email" value="${contact.email || ''}" placeholder="email@example.com" />
+            </div>
+          </div>
+          <div style="margin-top: 1rem;">
+            <label>
+              <span>Location Sharing Enabled</span>
+              <label class="toggle-switch" style="margin-left: 1rem;">
+                <input type="checkbox" class="location-sharing" ${contact.locationSharing ? 'checked' : ''}>
+                <span class="slider"></span>
+              </label>
+            </label>
+          </div>
+          <button type="button" onclick="textMyLocation(this)" style="margin-top: 1rem; width: 100%;">📍 Text My Location</button>
+          <button type="button" onclick="this.parentElement.remove()" style="margin-top: 0.5rem; background: #dc3545; width: 100%;">Remove Contact</button>
+        `;
+        container.appendChild(contactDiv);
+      }
+
+      function textMyLocation(button) {
+        const contactItem = button.closest('.emergency-contact-item');
+        const phone = contactItem.querySelector('.contact-phone').value;
+        const name = contactItem.querySelector('.contact-name').value;
+        
+        if (!phone) {
+          alert('Please enter a phone number for this contact first.');
+          return;
+        }
+        
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+            const lat = position.coords.latitude;
+            const lng = position.coords.longitude;
+            const profileUrl = window.location.href;
+            const message = `🚨 EMERGENCY! ${profileData.fullName || 'I'} need help!\n\nLocation: https://maps.google.com/?q=${lat},${lng}\n\nMedical Profile: ${profileUrl}\n\nContact: ${name || 'Emergency Contact'}`;
+            
+            window.location.href = `sms:${phone}?body=${encodeURIComponent(message)}`;
+          }, function(error) {
+            const message = `🚨 EMERGENCY! ${profileData.fullName || 'I'} need help!\n\nUnable to get exact location. Please call immediately!\n\nMedical Profile: ${window.location.href}`;
+            window.location.href = `sms:${phone}?body=${encodeURIComponent(message)}`;
+          });
+        }
+      }
+
+      function generateQRCode() {
+        const qrContainer = document.getElementById('qrCode');
+        const profileUrl = window.location.href;
+        
+        // Clear existing QR code
+        qrContainer.innerHTML = '';
+        
+        // Create QR code using QR Server API (free service)
+        const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(profileUrl)}`;
+        
+        const qrImg = document.createElement('img');
+        qrImg.src = qrCodeUrl;
+        qrImg.alt = 'QR Code for Medical Profile';
+        qrImg.style.border = '1px solid #ccc';
+        qrImg.style.borderRadius = '8px';
+        qrImg.width = 200;
+        qrImg.height = 200;
+        
+        qrImg.onerror = function() {
+          // Fallback: create a simple visual QR code placeholder
+          qrContainer.innerHTML = `
+            <div style="width: 200px; height: 200px; border: 1px solid #ccc; background: white; display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: monospace;">
+              <div style="font-size: 12px; margin-bottom: 10px;">📱 QR CODE</div>
+              <div style="font-size: 10px; text-align: center; padding: 10px;">
+                Scan to access<br>medical profile
+              </div>
+              <div style="font-size: 8px; margin-top: 10px; color: #666;">
+                ${window.location.hostname}
+              </div>
+            </div>
+          `;
+        };
+        
+        qrContainer.appendChild(qrImg);
+        console.log('QR Code generated for:', profileUrl);
+      }
+
+      function exportToPDF() {
+        // Create printable content
+        const printContent = generatePrintableProfile();
+        const printWindow = window.open('', '_blank');
+        printWindow.document.write(`
+          <html>
+            <head>
+              <title>Medical Profile - ${profileData.fullName}</title>
+              <style>
+                body { font-family: Arial, sans-serif; margin: 20px; }
+                .section { margin-bottom: 20px; padding: 15px; border: 1px solid #ddd; }
+                .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+                h2 { color: #d32f2f; }
+                h3 { color: #1976d2; margin-top: 0; }
+              </style>
+            </head>
+            <body>${printContent}</body>
+          </html>
+        `);
+        printWindow.document.close();
+        printWindow.print();
+      }
+
+      function printProfile() {
+        exportToPDF();
+      }
+
+      function generatePrintableProfile() {
+        return `
+          <h2>🏥 Emergency Medical Profile</h2>
+          <div class="section">
+            <h3>Personal Information</h3>
+            <div class="grid">
+              <div><strong>Name:</strong> ${profileData.fullName || 'Not specified'}</div>
+              <div><strong>Age:</strong> ${profileData.age || 'Not specified'}</div>
+              <div><strong>DOB:</strong> ${profileData.dateOfBirth || 'Not specified'}</div>
+              <div><strong>Weight:</strong> ${profileData.weight || 'Not specified'}</div>
+              <div><strong>Blood Type:</strong> ${profileData.bloodType || 'Not specified'}</div>
+              <div><strong>Organ Donor:</strong> ${profileData.donorStatus || 'Not specified'}</div>
+            </div>
+          </div>
+          
+          <div class="section">
+            <h3>Medical History</h3>
+            <p><strong>Personal:</strong> ${profileData.medicalHistory || 'None listed'}</p>
+            <p><strong>Family:</strong> ${profileData.familyMedicalHistory || 'None listed'}</p>
+          </div>
+          
+          <div class="section">
+            <h3>Current Medications</h3>
+            ${profileData.medications?.map(med => `<p>• ${med.name} - ${med.time}</p>`).join('') || '<p>None listed</p>'}
+          </div>
+          
+          <div class="section">
+            <h3>Allergies & Conditions</h3>
+            <p><strong>Allergies:</strong> ${profileData.allergies || 'None listed'}</p>
+            <p><strong>Conditions:</strong> ${profileData.conditions || 'None listed'}</p>
+          </div>
+          
+          <div class="section">
+            <h3>Emergency Contacts</h3>
+            ${profileData.emergencyContacts?.map(contact => `
+              <p><strong>${contact.name}</strong> (${contact.relationship})<br>
+              Phone: ${contact.phone}<br>
+              Email: ${contact.email}</p>
+            `).join('') || '<p>None listed</p>'}
+          </div>
+          
+          <div class="section">
+            <h3>Vaccination Status</h3>
+            <p>${profileData.vaccinationStatus || 'Not specified'}</p>
+          </div>
+          
+          <p><small>Generated: ${new Date().toLocaleString()}</small></p>
+        `;
+      }
+
+      function lockProfile() {
+        isAuthenticated = false;
+        document.getElementById('passwordScreen').classList.remove('hidden');
+        document.getElementById('profileContent').classList.add('hidden');
+        document.getElementById('passwordInput').value = '';
+        document.getElementById('errorMessage').textContent = '';
+      }
+
+      function changePassword() {
+        const newPassword = prompt('Enter new password (minimum 6 characters):');
+        if (newPassword && newPassword.length >= 6) {
+          const hashedPassword = btoa(newPassword);
+          localStorage.setItem('medicalProfilePassword', hashedPassword);
+          alert('✅ Password changed successfully!');
+        } else if (newPassword !== null) {
+          alert('❌ Password must be at least 6 characters long.');
+        }
+      }
+
+      // ICE Mode toggle
+      document.getElementById('iceMode').addEventListener('change', function() {
+        localStorage.setItem('iceMode', this.checked);
+        const iceInstructions = document.getElementById('iceInstructions');
+        const iceUrl = document.getElementById('iceUrl');
+        
+        if (this.checked) {
+          const emergencyUrl = window.location.origin + window.location.pathname + '?ice=true';
+          iceUrl.textContent = emergencyUrl;
+          iceInstructions.classList.remove('hidden');
+          alert('⚠️ ICE Mode enabled. Emergency responders can access your profile using the special emergency URL shown below.');
+        } else {
+          iceInstructions.classList.add('hidden');
+          alert('🔒 ICE Mode disabled. Password protection restored.');
+        }
+      });
+    </script>
+  </body>
+</html>

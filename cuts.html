@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Cuts - SwiftySave</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Hamburger Menu -->
+    <div class="hamburger-menu">
+      <button class="hamburger-button">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      
+      <nav class="hamburger-nav">
+        <div class="logo-container">
+          <strong>SwiftySave</strong>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Caduceus.svg/1200px-Caduceus.svg.png" alt="Medical Caduceus Symbol" />
+        </div>
+        <div class="emergency-buttons">
+          <a href="tel:4083324906" class="emergency-btn">911🚨</a>
+          <a href="tel:4083324906" class="emergency-btn poison-control-btn">Poison Control🚨</a>
+          <button onclick="shareLocation()" class="emergency-btn location-btn">Share Location📍</button>
+        </div>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="quiz.html">Practice Questions</a></li>
+          <li><a href="training.html">Training & Education</a></li>
+          <li><a href="profile.html">Medical Profile</a></li>
+          <li><a href="first-aid-supplies.html">First Aid Supplies</a></li>
+          <li><a href="cuts.html">Cuts</a></li>
+          <li><a href="burns.html">Burns</a></li>
+          <li><a href="sprains.html">Sprains</a></li>
+          <li><a href="fractures.html">Fractures</a></li>
+          <li><a href="choking.html">Choking</a></li>
+          <li><a href="nosebleeds.html">Nosebleeds</a></li>
+          <li><a href="eye-injuries.html">Eye Injuries</a></li>
+          <li><a href="insect-bites.html">Insect Bites</a></li>
+          <li><a href="cpr.html">CPR</a></li>
+          <li><a href="allergies.html">Anaphylaxis</a></li>
+          <li><a href="breathing-problems.html">Breathing Problems</a></li>
+          <li><a href="poisoning.html">Poisoning</a></li>
+          <li><a href="heat-cold-exposure.html">Heat/Cold Exposure</a></li>
+        </ul>
+      </nav>
+      
+      <div class="hamburger-overlay"></div>
+    </div>
+    <main class="container">
+      <div class="grid">
+        <section>
+          <hgroup>
+            <h2>Treating Cuts</h2>
+            <h3>Step-by-step wound care</h3>
+          </hgroup>
+
+          <h4>For Minor Cuts:</h4>
+          <ol>
+            <li><strong>Clean your hands</strong> - Wash thoroughly with soap and water</li>
+            <li><strong>Stop the bleeding</strong> - Apply gentle pressure with a clean cloth</li>
+            <li><strong>Clean the wound</strong> - Rinse with clean water. Remove debris with tweezers cleaned with alcohol</li>
+            <li><strong>Apply antibiotic</strong> - Use a thin layer of antibiotic ointment if available</li>
+            <li><strong>Cover the wound</strong> - Use a sterile bandage or adhesive bandage</li>
+            <li><strong>Change the dressing</strong> - Keep wound clean and dry, change bandage daily</li>
+          </ol>
+
+          <article>
+            <h4>⚠️ Seek Medical Help If:</h4>
+            <ul>
+              <li>Cut is deeper than 1/4 inch</li>
+              <li>Bleeding won't stop after 10 minutes of direct pressure</li>
+              <li>Cut has jagged or gaping edges</li>
+              <li>Signs of infection appear (increased pain, redness, swelling, pus)</li>
+              <li>You can't clean the wound properly</li>
+            </ul>
+          </article>
+
+          <figure>
+            <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxAQEBIQEBIQFRUQEA8QDxUVDw8PEBYQFREWFhUVFRUYHSggGBolHRUVITEhJSkrLi4uFx8zODMsNygtLisBCgoKDg0OGhAQGi0dHR0tLSstKy0tKystLS0tLS0tLS0tLSstLS0tLS0rLS0tKy0tLS0tLS0tKy0tLS0tLS0tK//AABEIAOEA4QMBIgACEQEDEQH/xAAbAAABBQEBAAAAAAAAAAAAAAABAAIDBAUGB//EAEEQAAIBAgIGBwUECQMFAAAAAAABAgMRBCEFEjFBUXEGMmGBkaGxEyJSwdEjQnLwFBUzQ2JzgpKyU+HxFpOio+L/xAAZAQEBAQEBAQAAAAAAAAAAAAAAAQIDBAX/xAAjEQEBAAIBBAIDAQEAAAAAAAAAAQIRAxIhMUETUQQUImEy/9oADAMBAAIRAxEAPwD05IKQUFIqEkFIKQUgBYNghAFg2CKwAsCUktrS5tIixmI1FlteUfqZNaGsnKWbfE558nT2d+Phuc34jdQrHNaCxbhiPYt+7UU3FblNK+XNXOnLhl1TbHJh0ZaNsKw4RtzNsKw4QDLCsOEA2wLDhANsCw4VgGNDWiSwGBHYDQ9gAjsBoexrAbYQ4ARMkGwUFIKSQRBsArBsJIICsKwQpAYmLnrVZcI2iu5Z+dw1E2iKk7uUuMpPzZfoUlbXnlHdxb+h5Z/Vr6X/ADjGDHA1PawrRslSnrNvY1b3orjlfxOpw9ZTipLevPf5jZUNezexKyhZJJdvD15Gdreyq3jmnfX3LYsl4HbDHpjx8uXXdtgQ2lNSV1sY+x0cTQhEA2wrDhAMsKw4FgG2BYeCwDGgNDgANA0PGsIY0NaJLDWgplhDrBAlsESCkAg2CFBQSDYQQhCYQxYGJo/BO8pTygpO25yz3dnaakUr3a2ZRSbsluy+XfwJ2lt4bOwoY2s93ic5jMY9PXc6WKxa2J87fTgVXWildtLdt7f+PEo4is1le8nZ8t2faYOlcbLNRbbbSSVtn5dzNzd8ODfZ0OAxkteTjL3c21lbf55G3hMVGostq2rgeY4TTUoOVO6ve8pZKN3lteduH1Zc0V0gTqv2cnss873ztbv3lx5GOb8WzvHpVhWKei8eq0E99s96v2F06vFZoBBsKwDRWHACGsVgiYUwDHgaAjaAx7QLAMaGtD2hrQDRDrCAlQ5AQ4BWDYQbAAIQ2CBYVhwrBUTqKxy+n9KSvqU0s8m7ZL5X+p0mNi1FuKT452yMLGzSvGnSUnxTu/PZ4nPN6vx9b3pgwVWcVr/Zq+vK+c5K+5ZeZXxsIqDTTirNOV7Ta3x4d3iyfE4v2a168oU43ukpQcpPhdPbyzOe05pSpWjFU1aKvKMpxsrbMlfPa/FHC19LDG2ua0/pZq3s1q3U453k7Jbee7PZck6JUqs9Z04uTbV5auSV7yz4f7d9rRPQ+WJmpT1nHWvJye2O3Jbl2nqOhdFU6MFRpxSjG2772e3xXgMZteblxxmvLM0HhMTGmpTb7FdJq522j+or+t13EDwijC27aR4OtqS1W/dk0lf4tx6cZp8fkst3GpYQRGnI2wGPY1gNEGwAgAY4AUwDH2GsBjAxzAwGiCAInQRIIWkEVggJIIggIQRBQaurGJjsK1J8LNrebhHXw6mrMzZtvDPprzPS+jqlfEqUFSajD3b3la7tkrpX/OZpYPovGUlKrNzeV3q2irbEo8r5bDp6WjIxk/yn2lyGCSVty/LOM43sy/KutRn0sHGK1YLK+b2t5cSzhaVnyLyhZWXeLVOsx08mXJajrZmZpKDdox3Zy57s/wA7TTrVFHnu+pRxVNtZ5JvP4pG3Nb0ZilVpp3u4+5L8S2vvyfeWzl8FOVCprWtGbSkuzLPmrs6ggQAiKGgY4DQQ0A5gYQ0axzAFNY1jmBgNuIIgJQoSHIBINhEFfFKOSzfgiXKSbqyW+FgJnvGS/hXiyOeLl8fgo/Q5XnxdZw5NQNjGWLqbp+UfoT4fGzbcXa6zzVrrirCc+JeHKNKwSn+mtbYeEv8AYS0jHZqy/wDH6mvkx+2fjy+lmpBPPgB1CFY2L+7LyS9Su6y3ppcnL0F5MftZx5fSy6zf5y7xvtHLKGfb91fUpT0hTWWrUlyi4oZU0paySnn92MHfvbtbuL1z7Pjy+mnRoJO796W/fmRYurCObzedr/IyqukK9vdgorbnJt99jMr4jETajdRXYk/FyuyXkizipmm9Jarv8Oa4NprKPF5I7HCYiNWnGpHZOKku9epw2N0Xld3b7fl2G50KxP2UqD20pNx/lyd/8r+KM4cm8tUzw1juOjsAcBnZxAARBTWNHsawhoAgCGsa0PY1hQEIQRKhyAhyQUJSsm+CbMmnFyze/Nl7SNS0LfE0u7aytSWR5ua7sj08OPbaOrTVjLqVFCXFPJr5o08StZWu0ZGI0at05+KfyPLlLt6cdez419WSaeT2Pdf85FyVdWjVj9zPu3oxVhKsbrKS3bmHA4iUXKE01dJq+y+x5kla6XWTkpJNbGr9xHCim795naJxF6ai/uNx/pTy8rF2piUdOqXvXPps7RLr60tVdWPW7XwLKSKeDyXPN95YlOysbx+6zlO+oSgmxypIFBZZ8SZs6YsVUxSSRnUYXkXcZLaVsGsxVnhLi6KsYFSq8NWjXiuq7TXxQfWX53pHS4l5GBpOF0zGXa7iTw7GnUUkpRd1JKUXxTV0xxz/AEMxjlRlRltoSsv5cs4+D1l3I6A9WN3NvLlNXQAHMbY0ABjgMIYAcxrCGsax7GsKaINhATIchqHAUdI5ygvxP0H6qSIcdNOaXBP1Rm6QxMorI8fJl/Ve3ix3jBxeISZWhikZGKxDcgU6rOcdcuzc9qhk6sd9jM/SSKde4qRbxGKV8iGOOae25RrPtKEq2dr5HPp7u2LutGY6NRXT59hbc7u3icT0Xx15VLPJzt4Kx2GGqbzeNutVjkkl7NFMdUlkQRYJzO8vZ57FbEyuOoxsrkMs2WWgU2vLIycdsNOs7GXjv+SVlU6M4jUxsY7qsZwfNLWX+Pmd2ea4RtYqjJZWrUvOSXzPSzrw3s5cs7gAImdnI0DHMADWNHMawAxjHjQAIQQJUECHBXP11Ka9zrQby4vY0YuMxreTTTW2+06SpFRqzS3tS72kxtXRlKr14J92Z4MsbvT38ec9uIqzvK7H06iW86HHdHMNb9mlyckZb6P4d7pLlUqL0ZnvHS9N7qFSqV51bGjU6Nr7tWqv6oy9UylX0DXj1asX+KH0fyDOp9qGIxVk23ZLa75HP4jSsppqnkm+tv7jcxXRurU/a1Fq/DFNJ895h6S0U8O4tZxcrPsf0E1t09dnQdHPcjFHeYGV4o4DRM76tuw7jRs/dEc82wpDJMZGQJO5025H0kSNkSyyFJ5GmahqSzKWMWRZmyli6mTJRgaTlb3Y7bp3W1Pd3ne9HdKxxNGL1k6kIxVZbGp261uDtc89rz1pWQqVOcJKdOUoyWxxk4vxRnDk6KueHVHqwGcHh+keNp7ZQqL+OCv4xt5mthelyf7WjJcXBqS8HY9M5sK894so6ZgKOG0xh6nVqRTe6V4PzLyOksvhjWjWBjhrKho0cxrAARCAlQUJBQVj6Syq/ijH6fIs06tkUtN1ffT+HLzBKtGSTT3XPHlf6unr45/M2bpHFqzMSnic3zDpOtZmfCtmYdb2jbhiBtWqinTkMq1RWUlWVzI03h4zpyS22uuazXoS1sTYzsdjGoTlwi7c9xiumNZuhqln2Hc6Kq3Ssec6LqWsd3oafuprbvLe1TLw6OEg3KsKg5Zmo56WVIkk/QgWRHiK+XcaZVK1fN23ZGRpHESa1Y7yeDcpPmGph8r5E8r4rLw9JLbzfaWIu7GVHd5FvDUNnbt7iVRhTyHxpKxM4i3GdG0UKKZJSjOH7OU4/hk0vAjcrFyghCpKemMTDa4y460V6qxdo9Iv9Sm12xd/JlPUIKlI1OTOe2Lx4306GhpahPZNJ8JJx9ci3dPZn5nGyojYU5R6rlHk3H0Ok/IvuMXgnquzCcf7Wt/qVP75CNfsz6T4L9u2QQIJ6XFi1op1pxayS/ySfzMjG4OpTd4azj2ZtG9pKlqzVRb1qy5rZ+ewVOeszxZ497Hr48u0ricZKb60Klv5c/oQ0MTTW125pr1PQ6sFq5mBjdVS2LtMdNjv1TKeGEsfS3Si/wCpFevjofFH+5GzLDUJ9aEH/SiGpoXCv91D+1F0x/Lma2Op/HH+5Mw9LaS1o6kU1F2bbVr8Ldh3f6toxeUUu4weleAg6MpRtrQWsu7b5XM+2+1nZzmh1rTyO60XdWOP6PUd/advgIlpWxQfEtU0VqUS1TIyJXxME1s7C3NpjJWNMaU8PhoxTds2VtITysi1XrJGbUqXuNw6VGMbPPmadKNkuOVytTo3d+HrtLtOOYKUiObyJahFJCorrNl6gyqqdixTZBaTBJDEx2sBHJBigvaJZjSlqoQ+whodShw0J9B4VXSq+xlxVmud0ZeCr3Tf52GnpSXuJcZK/cmzn8UnTbnDOL6y4PjyPLzX+np4fC/icXaPI5vG4u7u+ZZxWkouPcYFerrM473Xp12aNHEXSJ5YjIzaTRJOasWueir4lsydMVfsaje9avi0vmWcTXjBNyaSWbbdsjlsbpP9ImowvqReW5yfF9nYZdcY1dA078kdlgaew5/QmHtFdx0+DyETJdhEsxgxlJcS20rFkZV5Mq4mtZFqs7GTjam4lWKtWrvIKdVDcTL0IsPG8kSRa1ackoj4VEUpxe4jUmjbm0ZSFdGf7VksarCLbaFErKoSRmTRtPcfFkGuPVQqpNo5DEwphD9YA3WEB1iHojTHpnveJS01H7K6+7JN8tnzKNCzibU4qScWrppprsObmnRk6ct3VfGO5nn5se+3fivpnaS0JKV5U3bblZWOaxWj8VF2vD+x39T0aliElzMXS003c4aj1Y5VyMMJiHtmu6KJP1dVfWqS7tVeiNaNSIp1VY1qJcqyp6Ngou6vdNO+bZzGgsDabT+7JrwyOtxVdWbexGXoinm5W60m/Ex7dJezosHRskauDiUcJY0aM0iue12nLcSSnYq06qGVcSkRVitO6MXErMmqYtGXicZmZtWQ3ES+hHgpe++zYQ1Kt0Mws/eb7hilbGsQ1KgzXGtmmDFMljIj1Bkkyiz7QlpzKEbkiq22hNL2uOUynCsieJdp3WozJVIqwkSqYNptYRDrBIbdmgpjEFM97xpEZmncA6sFKHXgslvceHPeaKY5Mlks1Vl1dxxENIpLVndNZX5bnwZS0hi4vqnb47RVGvnUgr/Enqy8Vt7zMXRDD3u51rcLwXnqnmvBlPD1Y8+PtxsJDK1dLa+5Zs7qfRTCtW+1XKp9UVJ9CaP3alRc1CXyRLxZr82Dgql6j4JeL7WWsLBROx/6LjurS/7a+o19Cr/v/wD1f/RPiy+l+bFzmHxXqyxPHJcTfpdCqa21p90Ir1bLNLofhl1pVpc5RS8oj4c2fmxcx+so7mVauOct53tLo3g4/uk/xSnL1Zo0MNTgrQhCKe3VjGPoa/Xvup+xPUeT+3lxuNV2z1argKM3eVKm3xdOLfoQ1NEYZ7aNLP8AgS9CfrX7X9n/AB5c4tKyDTWqei1ejWEl+7cfwzkvVlOr0Povq1KseepJeifmT4MofPjXFe1Cqp0lfohVXUqU5c1KD+ZmYjQOJhtpSfbG0/TMzePKel+TG+1SnUJVIqVIOLs00+DTT8wwmYaXYpDlBMrwmTRmVNHewQPYvc2SQkTQZRFG62ksCWKRIoIIisEl1RAdYFBEe95BQ5CEEFBEIAiEIKSChCCCIQgEIQgEBhEA0QhBTfqB7QCCxjdKf2TOEQhHl5/Meji8HxJqYRHF0WYksAiLETRJkAQQRCEB/9k=" alt="Bandaging a cut wound" />
+            <figcaption>Proper bandaging technique for treating a cut wound</figcaption>
+          </figure>
+        </section>
+      </div>
+    </main>
+    <footer class="container">
+      <small></small>
+    </footer>
+    <script src="script.js"></script>
+  </body>
+</html>
