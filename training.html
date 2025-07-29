@@ -1,0 +1,397 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Training & Education - SwiftySave</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css" />
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      .training-container {
+        padding: 1rem;
+      }
+      
+      .flashcard-container {
+        max-width: 600px;
+        margin: 0 auto;
+        perspective: 1000px;
+      }
+      
+      .flashcard {
+        width: 100%;
+        height: 300px;
+        position: relative;
+        transform-style: preserve-3d;
+        transition: transform 0.6s;
+        cursor: pointer;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      }
+      
+      .flashcard.flipped {
+        transform: rotateY(180deg);
+      }
+      
+      .flashcard-face {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 20px;
+        border-radius: 10px;
+        box-sizing: border-box;
+      }
+      
+      .flashcard-front {
+        background: linear-gradient(135deg, var(--primary), var(--primary-focus));
+        color: white;
+      }
+      
+      .flashcard-back {
+        background: linear-gradient(135deg, #28a745, #20c997);
+        color: white;
+        transform: rotateY(180deg);
+      }
+      
+      .flashcard-content {
+        font-size: 1.2rem;
+        line-height: 1.4;
+      }
+      
+      .flashcard-controls {
+        margin: 20px 0;
+        text-align: center;
+      }
+      
+      .flashcard-controls button {
+        margin: 0 10px;
+        padding: 10px 20px;
+      }
+      
+      .flashcard-progress {
+        text-align: center;
+        margin: 20px 0;
+        font-size: 1.1rem;
+        color: var(--primary);
+      }
+      
+      .scene-safety {
+        background: var(--primary-focus);
+        border-left: 4px solid var(--primary);
+        padding: 20px;
+        margin: 20px 0;
+        border-radius: 5px;
+      }
+      
+      .injury-type-selector {
+        margin: 20px 0;
+      }
+      
+      .injury-info {
+        margin: 20px 0;
+        padding: 20px;
+        background: var(--card-background-color);
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      }
+      
+      .tab-buttons {
+        display: flex;
+        gap: 10px;
+        margin: 20px 0;
+        flex-wrap: wrap;
+      }
+      
+      .tab-button {
+        padding: 10px 15px;
+        border: 2px solid var(--primary);
+        background: transparent;
+        color: var(--primary);
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+      
+      .tab-button.active {
+        background: var(--primary);
+        color: white;
+      }
+      
+      .tab-content {
+        display: none;
+      }
+      
+      .tab-content.active {
+        display: block;
+      }
+      
+      @media (max-width: 768px) {
+        .flashcard {
+          height: 250px;
+        }
+        
+        .flashcard-content {
+          font-size: 1rem;
+        }
+        
+        .tab-buttons {
+          flex-direction: column;
+        }
+        
+        .tab-button {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Hamburger Menu -->
+    <div class="hamburger-menu">
+      <button class="hamburger-button">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav class="hamburger-nav">
+        <div class="logo-container">
+          <strong>SwiftySave</strong>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Caduceus.svg/1200px-Caduceus.svg.png" alt="Medical Caduceus Symbol" />
+        </div>
+        <div class="emergency-buttons">
+          <a href="tel:4083324906" class="emergency-btn">911🚨</a>
+          <a href="tel:4083324906" class="emergency-btn poison-control-btn">Poison Control🚨</a>
+          <button onclick="shareLocation()" class="emergency-btn location-btn">Share Location📍</button>
+        </div>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="quiz.html">Practice Questions</a></li>
+          <li><a href="training.html">Training & Education</a></li>
+          <li><a href="profile.html">Medical Profile</a></li>
+          <li><a href="first-aid-supplies.html">First Aid Supplies</a></li>
+          <li><a href="cuts.html">Cuts</a></li>
+          <li><a href="burns.html">Burns</a></li>
+          <li><a href="sprains.html">Sprains</a></li>
+          <li><a href="fractures.html">Fractures</a></li>
+          <li><a href="choking.html">Choking</a></li>
+          <li><a href="nosebleeds.html">Nosebleeds</a></li>
+          <li><a href="eye-injuries.html">Eye Injuries</a></li>
+          <li><a href="insect-bites.html">Insect Bites</a></li>
+          <li><a href="cpr.html">CPR</a></li>
+          <li><a href="allergies.html">Anaphylaxis</a></li>
+          <li><a href="breathing-problems.html">Breathing Problems</a></li>
+          <li><a href="poisoning.html">Poisoning</a></li>
+          <li><a href="heat-cold-exposure.html">Heat/Cold Exposure</a></li>
+        </ul>
+      </nav>
+
+      <div class="hamburger-overlay"></div>
+    </div>
+
+    <main class="container training-container">
+      <div class="grid">
+        <section>
+          <hgroup>
+            <h2>Training & Education</h2>
+            <h3>Learn with flashcards and comprehensive guides</h3>
+          </hgroup>
+
+          <div class="tab-buttons">
+            <button class="tab-button active" onclick="showTab('scene-safety')">Scene Safety</button>
+            <button class="tab-button" onclick="showTab('flashcards')">Flashcards</button>
+            <button class="tab-button" onclick="showTab('injury-info')">Injury Information</button>
+          </div>
+
+          <!-- Scene Safety Tab -->
+          <div id="scene-safety" class="tab-content active">
+            <article class="scene-safety">
+              <h3>🚨 Basic Steps When Approaching an Emergency Scene</h3>
+              
+              <h4>1. Scene Safety Assessment (FIRST PRIORITY)</h4>
+              <ul>
+                <li><strong>Stop and Look:</strong> Survey the scene before approaching</li>
+                <li><strong>Check for Hazards:</strong> Fire, electrical wires, traffic, violence, unstable structures</li>
+                <li><strong>Ensure Personal Safety:</strong> Never become a victim yourself</li>
+                <li><strong>Use PPE:</strong> Gloves, eye protection if available</li>
+                <li><strong>Call for Help:</strong> Dial 911 immediately if scene is dangerous</li>
+              </ul>
+
+              <h4>2. Initial Assessment</h4>
+              <ul>
+                <li><strong>Number of Victims:</strong> Count how many people need help</li>
+                <li><strong>Mechanism of Injury:</strong> What happened? (fall, car accident, etc.)</li>
+                <li><strong>Obvious Life Threats:</strong> Severe bleeding, not breathing, unconscious</li>
+                <li><strong>Bystander Information:</strong> Ask witnesses what they saw</li>
+              </ul>
+
+              <h4>3. Primary Survey (ABC)</h4>
+              <ul>
+                <li><strong>A - Airway:</strong> Is the airway clear and open?</li>
+                <li><strong>B - Breathing:</strong> Is the person breathing normally?</li>
+                <li><strong>C - Circulation:</strong> Check pulse, look for severe bleeding</li>
+                <li><strong>D - Disability:</strong> Check for spinal injury (don't move unless necessary)</li>
+                <li><strong>E - Exposure:</strong> Look for other injuries, maintain body temperature</li>
+              </ul>
+
+              <h4>4. Call for Emergency Services</h4>
+              <ul>
+                <li><strong>Call 911:</strong> If not already done</li>
+                <li><strong>Provide Clear Information:</strong> Location, number of victims, type of emergency</li>
+                <li><strong>Follow Dispatcher Instructions:</strong> They may guide you through care</li>
+                <li><strong>Don't Hang Up:</strong> Stay on line unless told otherwise</li>
+              </ul>
+
+              <h4>5. Provide Care</h4>
+              <ul>
+                <li><strong>Treat Life-Threatening Issues First:</strong> Severe bleeding, breathing problems</li>
+                <li><strong>Keep Victim Calm:</strong> Reassure and explain what you're doing</li>
+                <li><strong>Monitor Constantly:</strong> Watch for changes in condition</li>
+                <li><strong>Document:</strong> Remember what you did for emergency responders</li>
+              </ul>
+
+              <h4>⚠️ Universal Precautions</h4>
+              <ul>
+                <li>Treat all blood and body fluids as potentially infectious</li>
+                <li>Wear gloves when possible</li>
+                <li>Avoid direct contact with blood/fluids</li>
+                <li>Wash hands thoroughly after giving care</li>
+                <li>Use barriers (cloth, plastic) if no gloves available</li>
+              </ul>
+            </article>
+          </div>
+
+          <!-- Flashcards Tab -->
+          <div id="flashcards" class="tab-content">
+            <article>
+              <h4>Interactive Flashcards</h4>
+              <p>Select an injury type to study flashcards. Click the card to flip it and reveal the answer.</p>
+              
+              <div class="injury-type-selector">
+                <label for="flashcard-type">Choose Injury Type:</label>
+                <select id="flashcard-type" onchange="loadFlashcards()">
+                  <option value="">-- Select Type --</option>
+                  <option value="cuts">Cuts & Wounds</option>
+                  <option value="burns">Burns</option>
+                  <option value="sprains">Sprains & Strains</option>
+                  <option value="fractures">Fractures</option>
+                  <option value="choking">Choking</option>
+                  <option value="nosebleeds">Nosebleeds</option>
+                  <option value="eye-injuries">Eye Injuries</option>
+                  <option value="insect-bites">Insect Bites</option>
+                  <option value="cpr">CPR</option>
+                  <option value="first-aid-supplies">First Aid Supplies</option>
+                  <option value="allergies">Anaphylaxis</option>
+                  <option value="breathing-problems">Breathing Problems</option>
+                  <option value="poisoning">Poisoning</option>
+                  <option value="heat-cold-exposure">Heat/Cold Exposure</option>
+                </select>
+              </div>
+
+              <div id="flashcard-section" style="display: none;">
+                <div class="flashcard-progress">
+                  <span id="card-counter">Card 1 of 150</span>
+                </div>
+
+                <div class="flashcard-container">
+                  <div class="flashcard" id="flashcard" onclick="flipCard()">
+                    <div class="flashcard-face flashcard-front">
+                      <div class="flashcard-content" id="question-content">
+                        Select a category to begin learning!
+                      </div>
+                    </div>
+                    <div class="flashcard-face flashcard-back">
+                      <div class="flashcard-content" id="answer-content">
+                        Answer will appear here
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="flashcard-controls">
+                  <button onclick="previousCard()">← Previous</button>
+                  <button onclick="shuffleCards()">Shuffle</button>
+                  <button onclick="nextCard()">Next →</button>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <!-- Injury Information Tab -->
+          <div id="injury-info" class="tab-content">
+            <article>
+              <h4>Comprehensive Injury Information</h4>
+              <p>Detailed information about different types of injuries and their treatment.</p>
+
+              <div class="injury-info">
+                <h5>🩸 Cuts & Wounds</h5>
+                <p><strong>Types:</strong> Abrasions (scrapes), lacerations (cuts), punctures, avulsions (torn skin)</p>
+                <p><strong>Severity Signs:</strong> Deep cuts, arterial bleeding (bright red, spurting), numbness, inability to move</p>
+                <p><strong>Treatment Priority:</strong> Control bleeding first, then clean and dress wound</p>
+                <p><strong>When to Call 911:</strong> Severe bleeding, deep cuts, cuts on neck/chest, signs of shock</p>
+              </div>
+
+              <div class="injury-info">
+                <h5>🔥 Burns</h5>
+                <p><strong>Types:</strong> First-degree (red skin), Second-degree (blisters), Third-degree (white/charred skin)</p>
+                <p><strong>Causes:</strong> Heat, chemicals, electricity, radiation, friction</p>
+                <p><strong>Rule of 9s:</strong> Head=9%, each arm=9%, chest=18%, back=18%, each leg=18%, genitals=1%</p>
+                <p><strong>Critical Burns:</strong> >10% body area, face/hands/feet/genitals, airway involvement</p>
+              </div>
+
+              <div class="injury-info">
+                <h5>🦴 Fractures</h5>
+                <p><strong>Types:</strong> Closed (skin intact), Open (bone visible), Greenstick (partial), Comminuted (shattered)</p>
+                <p><strong>Signs:</strong> Deformity, swelling, pain, inability to use, grinding sensation</p>
+                <p><strong>Complications:</strong> Blood vessel damage, nerve damage, infection (open fractures)</p>
+                <p><strong>Immobilization:</strong> Splint above and below injury, check circulation frequently</p>
+              </div>
+
+              <div class="injury-info">
+                <h5>🫁 Breathing Emergencies</h5>
+                <p><strong>Signs of Distress:</strong> Rapid breathing, use of accessory muscles, tripod position, cyanosis</p>
+                <p><strong>Asthma:</strong> Wheezing, tight chest, difficulty speaking, use of rescue inhaler</p>
+                <p><strong>Anaphylaxis:</strong> Rapid onset, whole-body reaction, requires epinephrine</p>
+                <p><strong>Pneumothorax:</strong> Sudden chest pain, shortness of breath, unequal chest movement</p>
+              </div>
+
+              <div class="injury-info">
+                <h5>💊 Poisoning</h5>
+                <p><strong>Routes:</strong> Ingestion (swallowed), Inhalation (breathed), Absorption (skin), Injection</p>
+                <p><strong>Common Poisons:</strong> Medications, household chemicals, carbon monoxide, plants, alcohol</p>
+                <p><strong>Antidotes:</strong> Activated charcoal (some ingestions), specific antidotes for certain poisons</p>
+                <p><strong>Poison Control:</strong> 1-800-222-1222 (available 24/7)</p>
+              </div>
+
+              <div class="injury-info">
+                <h5>🌡️ Temperature Emergencies</h5>
+                <p><strong>Heat Exhaustion:</strong> Heavy sweating, weakness, nausea, normal mental status</p>
+                <p><strong>Heat Stroke:</strong> High temperature, altered mental status, hot/dry skin, life-threatening</p>
+                <p><strong>Hypothermia:</strong> Body temperature <95°F, shivering, confusion, slurred speech</p>
+                <p><strong>Frostbite:</strong> Frozen tissue, white/gray skin, hard/waxy feel, numbness</p>
+              </div>
+
+              <div class="injury-info">
+                <h5>❤️ Cardiac Emergencies</h5>
+                <p><strong>Heart Attack:</strong> Chest pain, shortness of breath, nausea, sweating, arm pain</p>
+                <p><strong>Cardiac Arrest:</strong> No pulse, not breathing, unconscious - requires immediate CPR</p>
+                <p><strong>AED Use:</strong> Turn on, follow prompts, ensure no one touching during shock</p>
+                <p><strong>CPR Ratios:</strong> 30 compressions : 2 breaths, push hard and fast 100-120/min</p>
+              </div>
+            </article>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="container">
+      <small></small>
+    </footer>
+    <script src="script.js"></script>
+    <script src="training.js"></script>
+  </body>
+</html>
